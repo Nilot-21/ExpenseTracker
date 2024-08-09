@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h2>Summary</h2>
+        <form action="" method="POST">
+            {%csrf_token%}
+            <select name="month_dropdown">
+                {%for i in month%}
+                <option>{{i}}</option>
+                {%endfor%}
+                <option>All</option>
+            </select>
+            <select name="year_dropdown">
+                {%for i in years%}
+                <option>{{i}}</option>
+                {%endfor%}
+                <option>All</option>
+            </select>
+            <input type="submit" value="check">
+        </form>
+        <br><br>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Total Patient</th>
+                    <th>Month</th>
+                    <th>Total Charges</th>
+                    <th>Is Audited(Y/N)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in queryset%}
+                <tr>
+                    <td>{{i.count}}</td>
+                    <td>{{i.selecte_month}}</td>
+                    <td>{{i.total_charge}}</td>
+                    <td>{{i.isAudited}}</td>
+                </tr>
+                {%endfor%}
+                
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h2>Report</h2>
+        <form action="" method="POST">
+            {%csrf_token%}
+            <p align="right">
+                <label>From Date:</label>
+               <input type="date" name="from">
+               <label>To Date:</label>
+               <input type="date" name="to">
+               <input type="submit" value="check">
+              
+            </p>
+            <label>Choose a Patient:</label>    
+            <select name="patient_name">
+            <option>select for patient</option>
+             {%for i in name%}
+             <option>{{i.patient.patient_name}}</option>
+             {%endfor%}
+             <option>all</option>
+            </select>
+            <input type="submit" value="Search">
+            <br><br>
+          </form>
+          
+        <table border="2">
+            <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Address</td>
+                    <td>Patient Name</td>
+                    <td>Phone Number</td>
+                    <td>Total Charges</td>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {%for details in detail%}
+                <tr>
+                    <td>{{details.patient.appointment_date}}</td>
+                    <td>{{details.patient.address}}</td>
+                    <td>{{details.patient.patient_name}}</td>
+                    <td>{{details.patient.phone_no}}</td>
+                    <td>{{details.fee.total_amount}}</td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+            
+        </table>
+        The total amount is Rs.{{total}}
+    </center>
+</body>
+</html>
+
